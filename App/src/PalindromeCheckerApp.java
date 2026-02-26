@@ -1,29 +1,42 @@
 
 
-public class PalindromeCheckerApp {
 
-    /**
-     * Application entry point for UC3.
-     * * @param args Command-line arguments
-     */
-    public static void main(String[] args) {
-        // Input string to be checked
-        String input = "madam";
-        String reversed = "";
+    public class PalindromeCheckerApp {
 
-        // UC3 Flow Step 1: Reverse string using loop
-        // Hint: Iterate from the last character to the first
-        for (int i = input.length() - 1; i >= 0; i--) {
-            // Using String Concatenation (+) to build the reversed string
-            reversed = reversed + input.charAt(i);
-        }
+        /**
+         * Application entry point for UC4.
+         * * @param args Command-line arguments
+         */
+        public static void main(String[] args) {
+            // Declare and initialize the input string.
+            String input = "radar";
 
-        // UC3 Flow Step 2 & 3: Compare and Display result
-        // Use equals() to compare content instead of memory references
-        if (input.equals(reversed)) {
-            System.out.println("The string \"" + input + "\" is a palindrome.");
-        } else {
-            System.out.println("The string \"" + input + "\" is NOT a palindrome.");
+            // Convert the string into a character array.
+            char[] chars = input.toCharArray();
+
+            // Initialize pointer at the beginning.
+            int start = 0;
+
+            // Initialize pointer at the end.
+            int end = chars.length - 1;
+
+            // Assume palindrome initially.
+            boolean isPalindrome = true;
+
+            // Continue comparison until pointers cross.
+            while (start < end) {
+                // Compare characters at both ends
+                if (chars[start] != chars[end]) {
+                    isPalindrome = false;
+                    break; // Exit loop if a mismatch is found
+                }
+                // Move pointers towards the center
+                start++;
+                end--;
+            }
+
+            // Display the final result
+            System.out.println("Input : " + input);
+            System.out.println("Is Palindrome? : " + isPalindrome);
         }
     }
-}
