@@ -5,42 +5,39 @@
 
 
 
-            public class PalindromeCheckerApp {
 
-                /**
-                 * Application entry point for UC4.
-                 * * @param args Command-line arguments
-                 */
-                public static void main(String[] args) {
-                    // Declare and initialize the input string.
-                    String input = "radar";
+                public class PalindromeCheckerApp {
 
-                    // Convert the string into a character array.
-                    char[] chars = input.toCharArray();
+                    /**
+                     * Application entry point for UC7.
+                     * @param args Command-line arguments
+                     */
+                    public static void main(String[] args) {
+                        // Step 1: Define the input string
+                        String input = "refer";
 
-                    // Initialize pointer at the beginning.
-                    int start = 0;
+                        // Step 2: Create a Deque to store characters
+                        Deque<Character> deque = new ArrayDeque<>();
 
-                    // Initialize pointer at the end.
-                    int end = chars.length - 1;
-
-                    // Assume palindrome initially.
-                    boolean isPalindrome = true;
-
-                    // Continue comparison until pointers cross.
-                    while (start < end) {
-                        // Compare characters at both ends
-                        if (chars[start] != chars[end]) {
-                            isPalindrome = false;
-                            break; // Exit loop if mismatch is found
+                        // Step 3: Add each character to the deque
+                        for (char c : input.toCharArray()) {
+                            deque.add(c);
                         }
-                        // Move pointers towards the center
-                        start++;
-                        end--;
-                    }
 
-                    // Display the final result
-                    System.out.println("Input : " + input);
-                    System.out.println("Is Palindrome? : " + isPalindrome);
+                        // Step 4: Flag to track palindrome result
+                        boolean isPalindrome = true;
+
+                        // Step 5: Continue comparison while more than one element exists
+                        while (deque.size() > 1) {
+                            // Remove from both ends and compare
+                            if (!deque.removeFirst().equals(deque.removeLast())) {
+                                isPalindrome = false;
+                                break;
+                            }
+                        }
+
+                        // Step 6: Display the result
+                        System.out.println("Input : " + input);
+                        System.out.println("Is Palindrome? : " + isPalindrome);
+                    }
                 }
-            }
