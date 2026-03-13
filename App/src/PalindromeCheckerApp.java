@@ -1,43 +1,36 @@
+import java.util.LinkedList;
 
+public class UseCase8PalindromeCheckerApp {
 
+    public static void main(String[] args) {
 
+        // Define the input string
+        String input = "level";
 
+        // Create a LinkedList to store characters
+        LinkedList<Character> list = new LinkedList<>();
 
+        // Add each character to the linked list
+        for (char c : input.toCharArray()) {
+            list.add(c);
+        }
 
+        // Flag to track palindrome state
+        boolean isPalindrome = true;
 
+        // Compare until only one or zero elements remain
+        while (list.size() > 1) {
+            char first = list.removeFirst();
+            char last = list.removeLast();
 
-                public class PalindromeCheckerApp {
+            if (first != last) {
+                isPalindrome = false;
+                break;
+            }
+        }
 
-                    /**
-                     * Application entry point for UC7.
-                     * @param args Command-line arguments
-                     */
-                    public static void main(String[] args) {
-                        // Step 1: Define the input string
-                        String input = "refer";
-
-                        // Step 2: Create a Deque to store characters
-                        Deque<Character> deque = new ArrayDeque<>();
-
-                        // Step 3: Add each character to the deque
-                        for (char c : input.toCharArray()) {
-                            deque.add(c);
-                        }
-
-                        // Step 4: Flag to track palindrome result
-                        boolean isPalindrome = true;
-
-                        // Step 5: Continue comparison while more than one element exists
-                        while (deque.size() > 1) {
-                            // Remove from both ends and compare
-                            if (!deque.removeFirst().equals(deque.removeLast())) {
-                                isPalindrome = false;
-                                break;
-                            }
-                        }
-
-                        // Step 6: Display the result
-                        System.out.println("Input : " + input);
-                        System.out.println("Is Palindrome? : " + isPalindrome);
-                    }
-                }
+        // Print result
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
+    }
+}
