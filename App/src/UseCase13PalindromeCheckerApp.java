@@ -3,52 +3,51 @@ import java.util.Stack;
 
 /**
  * ============================================================================
- * MAIN CLASS - UseCase12PalindromeCheckerApp
+ * MAIN CLASS - UseCase13PalindromeCheckerApp
  * ============================================================================
- * Use Case 12: Strategy Pattern for Palindrome Algorithms
- * This class demonstrates how different palindrome validation algorithms
- * can be selected dynamically at runtime.
+ * UC13: Performance Comparison
  */
-public class UseCase12PalindromeCheckerApp {
+public class UseCase13PalindromeCheckerApp {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-        // Context: We use the strategy interface to allow for future algorithm swapping
         PalindromeStrategy strategy = new StackStrategy();
 
         System.out.print("Input : ");
         String input = scanner.nextLine();
 
+        // Start measurement
+        long startTime = System.nanoTime();
+
         boolean isPalindrome = strategy.check(input);
 
+        // End measurement
+        long endTime = System.nanoTime();
+
         System.out.println("Is Palindrome? : " + isPalindrome);
+        System.out.println("Execution Time : " + (endTime - startTime) + " ns");
 
         scanner.close();
     }
 }
 
 /**
- * INTERFACE - PalindromeStrategy
- * Defines a contract for all palindrome checking algorithms.
+ * Strategy pattern interface for palindrome algorithms.
  */
 interface PalindromeStrategy {
     boolean check(String input);
 }
 
 /**
- * CLASS - StackStrategy
- * Implements palindrome validation using the LIFO behavior of a Stack.
+ * Implementation using a Stack data structure.
  */
 class StackStrategy implements PalindromeStrategy {
-
     @Override
     public boolean check(String input) {
-        if (input == null || input.isEmpty()) {
-            return true;
-        }
+        if (input == null || input.isEmpty()) return true;
 
-        // Properly initialized stack
+        //
+        // This stack stores characters to reverse the input string order
         Stack<Character> stack = new Stack<>();
 
         // Push all characters onto the stack
@@ -56,13 +55,12 @@ class StackStrategy implements PalindromeStrategy {
             stack.push(c);
         }
 
-        // Pop and compare to reverse the string
+        // Pop and compare characters (LIFO order reverses the input)
         for (char c : input.toCharArray()) {
             if (c != stack.pop()) {
                 return false;
             }
         }
-
         return true;
     }
 }
